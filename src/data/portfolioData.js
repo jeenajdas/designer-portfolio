@@ -1,4 +1,4 @@
-
+// src/data/portfolioData.js
 
 export const navItems = [
   { name: 'HOME', href: '#home' },
@@ -22,31 +22,31 @@ export const about = {
 export const skills = [
   {
     id: 1,
-    icon: "🎨",
+    icon: "palette",
     title: "UI/UX Design",
     description: "Research & Strategy, Research, wireframing, prototyping, visual design, interaction design, information architecture, usability testing"
   },
   {
     id: 2,
-    icon: "🖥️",
+    icon: "monitor",
     title: "UI Design",
     description: "Visual Design, Design Systems, Responsive Web Design, Typography, & Color Theory"
   },
   {
     id: 3,
-    icon: "✏️",
+    icon: "layout",
     title: "UX Design",
     description: "Wireframing & Prototyping, User Flow Design, Interaction Design, Usability Testing"
   },
   {
     id: 4,
-    icon: "🛠️",
+    icon: "settings",
     title: "Tools & Technology",
     description: "Figma, Adobe XD, Adobe Photoshop, Adobe Illustrator, Canva, Framer"
   },
   {
     id: 5,
-    icon: "💡",
+    icon: "lightbulb",
     title: "Soft Skills",
     description: "Creative Problem Solving, Collaboration & Communication, Design Thinking, Time Management"
   }

@@ -1,84 +1,117 @@
+import { useState, useEffect, useRef } from 'react';
 import { skills, skillsIntro } from '../data/portfolioData';
 
+const IconMap = {
+  palette: (
+    <svg className="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+    </svg>
+  ),
+  monitor: (
+    <svg className="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+    </svg>
+  ),
+  layout: (
+    <svg className="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+    </svg>
+  ),
+  settings: (
+    <svg className="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+    </svg>
+  ),
+  lightbulb: (
+    <svg className="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+    </svg>
+  )
+};
+
 export default function Skills() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <section id="skills" className="min-h-screen bg-white py-20 px-6">
-      <div className="max-w-7xl mx-auto">
+    <section ref={sectionRef} id="skills" className="bg-white py-24 px-4 sm:px-6 lg:px-8">
+      <div className="w-full mx-auto" style={{ maxWidth: '1400px' }}>
         {/* Header */}
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-5xl md:text-6xl font-bold text-black mb-4 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 transition-all duration-300 inline-block">
-            {skillsIntro.title}
+        <div className={`mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h2 className="text-5xl md:text-6xl font-bold text-black mb-8">
+            SKILLS
           </h2>
-          <p className="text-gray-600 text-lg max-w-3xl mx-auto mt-6">
-            {skillsIntro.description}
-          </p>
+          <div className="border-l-4 border-gray-900 pl-6">
+            <p className="text-gray-600 text-base md:text-lg leading-relaxed">
+              {skillsIntro.description}
+            </p>
+          </div>
         </div>
 
-        {/* Skills Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Top Border */}
+        <div className="border-t border-gray-300 mb-0"></div>
+
+        {/* Skills List */}
+        <div className="space-y-0">
           {skills.map((skill, index) => (
             <div
               key={skill.id}
-              className="group bg-white border-2 border-gray-200 rounded-2xl p-6 hover:border-purple-500 hover:shadow-2xl hover:shadow-purple-500/20 transform hover:-translate-y-2 transition-all duration-300 cursor-pointer"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className={`border-b border-gray-300 transition-all duration-700 ${
+                isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+              }`}
+              style={{ transitionDelay: `${index * 0.15}s` }}
             >
-              {/* Icon */}
-              <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-3xl mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
-                {skill.icon}
+              <div className="grid grid-cols-1 md:grid-cols-[80px_1fr] lg:grid-cols-[100px_300px_1fr] gap-6 md:gap-8 lg:gap-16 py-12 md:py-16 lg:py-20">
+                {/* Icon */}
+                <div className="flex items-start justify-start md:justify-center">
+                  <div className="w-12 h-12 md:w-16 md:h-16 text-black flex-shrink-0">
+                    {IconMap[skill.icon]}
+                  </div>
+                </div>
+
+                {/* Title with Vertical Line */}
+                <div className="relative flex items-start">
+                  {/* Vertical Line - Only on desktop */}
+                  <div className="hidden lg:block absolute -left-8 top-0 bottom-0 w-px bg-gray-300"></div>
+                  
+                  <h3 className="text-xl md:text-2xl font-bold text-black leading-tight">
+                    {skill.title}
+                  </h3>
+                </div>
+
+                {/* Description */}
+                <div className="flex items-start">
+                  <p className="text-gray-600 text-base md:text-lg leading-relaxed">
+                    {skill.description}
+                  </p>
+                </div>
               </div>
-
-              {/* Title */}
-              <h3 className="text-xl font-bold text-black mb-3 group-hover:text-purple-600 transition-colors duration-300">
-                {skill.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-gray-600 text-sm leading-relaxed group-hover:text-gray-800 transition-colors duration-300">
-                {skill.description}
-              </p>
-
-              {/* Hover indicator line */}
-              <div className="mt-4 h-1 w-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full group-hover:w-full transition-all duration-500"></div>
             </div>
           ))}
         </div>
-
-        {/* Bottom decoration */}
-        <div className="mt-16 text-center">
-          <div className="inline-flex items-center gap-2 text-gray-400 hover:text-purple-600 transition-colors duration-300 cursor-pointer group">
-            <span className="text-sm font-medium">And many more skills to explore</span>
-            <svg 
-              className="w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </div>
-        </div>
       </div>
-
-      <style>{`
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fade-in {
-          animation: fade-in 0.8s ease-out;
-        }
-
-        .grid > div {
-          animation: fade-in 0.6s ease-out backwards;
-        }
-      `}</style>
     </section>
   );
 }
