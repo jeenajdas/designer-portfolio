@@ -36,31 +36,28 @@ export default function Skills() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
+      ([entry]) => entry.isIntersecting && setIsVisible(true),
       { threshold: 0.1 }
     );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
+    const section = sectionRef.current;
+    if (section) observer.observe(section);
+    return () => section && observer.unobserve(section);
   }, []);
 
   return (
-    <section ref={sectionRef} id="skills" className="bg-white py-24 px-4 sm:px-6 lg:px-8">
-      <div className="w-full mx-auto" style={{ maxWidth: '1400px' }}>
+    <section
+      ref={sectionRef}
+      id="skills"
+      className="bg-white py-16 md:py-20 px-4 sm:px-6 lg:px-8"
+    >
+      <div className="w-full mx-auto" style={{ maxWidth: '1200px' }}>
         {/* Header */}
-        <div className={`mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h2 className="text-5xl md:text-6xl font-bold text-black mb-8">
+        <div
+          className={`mb-10 transition-all duration-1000 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
             SKILLS
           </h2>
           <div className="border-l-4 border-gray-900 pl-6">
@@ -71,39 +68,37 @@ export default function Skills() {
         </div>
 
         {/* Top Border */}
-        <div className="border-t border-gray-300 mb-0"></div>
+        <div className="border-t border-gray-300"></div>
 
         {/* Skills List */}
-        <div className="space-y-0">
+        <div>
           {skills.map((skill, index) => (
             <div
               key={skill.id}
               className={`border-b border-gray-300 transition-all duration-700 ${
                 isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
               }`}
-              style={{ transitionDelay: `${index * 0.15}s` }}
+              style={{ transitionDelay: `${index * 0.12}s` }}
             >
-              <div className="grid grid-cols-1 md:grid-cols-[80px_1fr] lg:grid-cols-[100px_300px_1fr] gap-6 md:gap-8 lg:gap-16 py-12 md:py-16 lg:py-20">
+              <div className="flex flex-col lg:grid lg:grid-cols-[80px_240px_1fr] gap-4 lg:gap-10 py-8 lg:py-14">
                 {/* Icon */}
-                <div className="flex items-start justify-start md:justify-center">
-                  <div className="w-12 h-12 md:w-16 md:h-16 text-black flex-shrink-0">
+                <div className="flex items-start justify-start">
+                  <div className="w-10 h-10 text-black flex-shrink-0">
                     {IconMap[skill.icon]}
                   </div>
                 </div>
 
-                {/* Title with Vertical Line */}
+                {/* Title */}
                 <div className="relative flex items-start">
-                  {/* Vertical Line - Only on desktop */}
-                  <div className="hidden lg:block absolute -left-8 top-0 bottom-0 w-px bg-gray-300"></div>
-                  
-                  <h3 className="text-xl md:text-2xl font-bold text-black leading-tight">
+                  <div className="hidden lg:block absolute -left-6 top-0 bottom-0 w-px bg-gray-300"></div>
+                  <h3 className="text-lg lg:text-xl font-bold text-black leading-tight">
                     {skill.title}
                   </h3>
                 </div>
 
                 {/* Description */}
                 <div className="flex items-start">
-                  <p className="text-gray-600 text-base md:text-lg leading-relaxed">
+                  <p className="text-gray-600 text-sm md:text-base leading-relaxed">
                     {skill.description}
                   </p>
                 </div>

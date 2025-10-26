@@ -1,16 +1,17 @@
 import { useState } from 'react';
+import { Mail, Phone, MapPin, Send, MessageCircle, Linkedin, Instagram } from 'lucide-react';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    subject: '',
     message: ''
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-    
   };
 
   const handleChange = (e) => {
@@ -22,25 +23,28 @@ export default function Contact() {
 
   return (
     <section id="contact" className="min-h-screen bg-black py-20 px-6">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
-            Let's Connect
-          </h2>
-          <div className="h-1 w-24 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mx-auto mb-6"></div>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-            Have a project in mind or just want to chat? I'd love to hear from you!
-          </p>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
-          <div className="space-y-8">
-            <div className="animate-slide-right">
-              <h3 className="text-3xl font-bold text-white mb-6">Get in Touch</h3>
-              <p className="text-gray-400 mb-8 leading-relaxed">
-                I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+      <div className="max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left Side - Contact Info */}
+          <div className="space-y-12" data-aos="fade-right">
+            <div>
+              <h2 
+                className="text-6xl md:text-7xl font-black text-white mb-8 leading-tight" 
+                style={{ 
+                  fontFamily: 'Poppins',
+                  fontWeight: 900,
+                  fontSize: '60px',
+                  lineHeight: '70px',
+                  backgroundImage: 'linear-gradient(to right, #ADADADDD, #ADADADDD)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent'
+                }}
+              >
+                Get in Touch<br />with Us
+              </h2>
+              <p className="text-gray-400 text-lg font-medium">
+                Let's Work Together :
               </p>
             </div>
 
@@ -48,82 +52,75 @@ export default function Contact() {
             <div className="space-y-6">
               {[
                 {
-                  icon: (
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                  ),
-                  label: 'Email',
-                  value: 'marshal@example.com',
-                  link: 'mailto:marshal@example.com'
+                  icon: Mail,
+                  label: 'marshalpod6@gmail.com',
+                  link: 'mailto:marshalpod6@gmail.com'
                 },
                 {
-                  icon: (
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                  ),
-                  label: 'Phone',
-                  value: '+91 123 456 7890',
-                  link: 'tel:+911234567890'
+                  icon: Phone,
+                  label: '+91 73568 28755',
+                  link: 'tel:+917356828755'
                 },
                 {
-                  icon: (
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                  ),
-                  label: 'Location',
-                  value: 'Kerala, India',
+                  icon: MapPin,
+                  label: 'Kannur, Kerala',
                   link: null
                 }
               ].map((item, index) => (
                 <a
-                  key={item.label}
+                  key={index}
                   href={item.link || '#'}
-                  className="group flex items-center gap-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-purple-500/50 hover:bg-white/10 transform hover:-translate-y-1 transition-all duration-300"
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                  className="group flex items-center gap-4 text-gray-300 hover:text-white transform hover:translate-x-2 transition-all duration-300"
                 >
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-white group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
-                    {item.icon}
+                  <div className="w-6 h-6 text-white flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <item.icon className="w-6 h-6" />
                   </div>
-                  <div>
-                    <p className="text-gray-400 text-sm">{item.label}</p>
-                    <p className="text-white font-semibold">{item.value}</p>
-                  </div>
+                  <span className="text-lg font-medium">{item.label}</span>
                 </a>
               ))}
             </div>
 
             {/* Social Links */}
-            <div className="pt-8">
-              <p className="text-gray-400 mb-4">Follow me on</p>
+            <div>
+              <p className="text-gray-400 mb-6 font-medium">Follow me on</p>
               <div className="flex gap-4">
                 {[
-                  { name: 'LinkedIn', icon: 'in', link: '#' },
-                  { name: 'GitHub', icon: 'gh', link: '#' },
-                  { name: 'Twitter', icon: 'tw', link: '#' },
-                  { name: 'Dribbble', icon: 'dr', link: '#' }
-                ].map((social) => (
+                  { name: 'WhatsApp', icon: MessageCircle, url: '#' },
+                  { name: 'Behance', icon: 'Be', url: '#' },
+                  { name: 'LinkedIn', icon: Linkedin, url: '#' },
+                  { name: 'Instagram', icon: Instagram, url: '#' }
+                ].map((social, idx) => (
                   <a
                     key={social.name}
-                    href={social.link}
-                    className="w-12 h-12 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-white hover:bg-gradient-to-br hover:from-blue-500 hover:to-purple-600 hover:border-transparent transform hover:-translate-y-1 hover:scale-110 transition-all duration-300"
+                    href={social.url}
+                    className="group relative w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold text-sm overflow-hidden transition-all duration-300 hover:scale-110 hover:shadow-2xl transform hover:-translate-y-2"
+                    style={{
+                      background: 'linear-gradient(180deg, #2300EE 0%, #000000 100%)',
+                    }}
                     aria-label={social.name}
                   >
-                    <span className="text-sm font-bold">{social.icon}</span>
+                    {/* Hover animation background */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                    
+                    {/* Content */}
+                    <div className="relative z-10">
+                      {typeof social.icon === 'string' ? (
+                        <span>{social.icon}</span>
+                      ) : (
+                        <social.icon className="w-5 h-5 group-hover:scale-125 transition-transform duration-300" />
+                      )}
+                    </div>
                   </a>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* Contact Form */}
-          <div className="animate-slide-left">
-            <div className="space-y-6">
-              <div>
-                <label className="block text-white font-medium mb-2">
+          {/* Right Side - Contact Form */}
+          <div className="space-y-8" data-aos="fade-left" data-aos-delay="200">
+            <div className="space-y-8">
+              <div className="group hover-lift">
+                <label className="block text-white font-semibold mb-4 text-sm transition-colors duration-300 group-hover:text-blue-400">
                   Your Name
                 </label>
                 <input
@@ -131,13 +128,13 @@ export default function Contact() {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder-gray-500 focus:border-purple-500 focus:bg-white/10 focus:outline-none transition-all duration-300"
-                  placeholder="John Doe"
+                  className="w-full bg-transparent border-b-2 border-gray-600 px-0 py-3 text-white placeholder-gray-600 focus:border-blue-500 transition-all duration-300 group-hover:border-gray-400 contact-input"
+                  placeholder="Your Name"
                 />
               </div>
 
-              <div>
-                <label className="block text-white font-medium mb-2">
+              <div className="group hover-lift">
+                <label className="block text-white font-semibold mb-4 text-sm transition-colors duration-300 group-hover:text-blue-400">
                   Email Address
                 </label>
                 <input
@@ -145,92 +142,116 @@ export default function Contact() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder-gray-500 focus:border-purple-500 focus:bg-white/10 focus:outline-none transition-all duration-300"
-                  placeholder="john@example.com"
+                  className="w-full bg-transparent border-b-2 border-gray-600 px-0 py-3 text-white placeholder-gray-600 focus:border-blue-500 transition-all duration-300 group-hover:border-gray-400 contact-input"
+                  placeholder="Email Address"
                 />
               </div>
 
-              <div>
-                <label className="block text-white font-medium mb-2">
+              <div className="group hover-lift">
+                <label className="block text-white font-semibold mb-4 text-sm transition-colors duration-300 group-hover:text-blue-400">
+                  Subject
+                </label>
+                <input
+                  type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  className="w-full bg-transparent border-b-2 border-gray-600 px-0 py-3 text-white placeholder-gray-600 focus:border-blue-500 transition-all duration-300 group-hover:border-gray-400 contact-input"
+                  placeholder="Subject"
+                />
+              </div>
+
+              <div className="group hover-lift">
+                <label className="block text-white font-semibold mb-4 text-sm transition-colors duration-300 group-hover:text-blue-400">
                   Message
                 </label>
                 <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  rows={6}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder-gray-500 focus:border-purple-500 focus:bg-white/10 focus:outline-none transition-all duration-300 resize-none"
-                  placeholder="Tell me about your project..."
+                  rows={5}
+                  className="w-full bg-transparent border-b-2 border-gray-600 px-0 py-3 text-white placeholder-gray-600 focus:border-blue-500 transition-all duration-300 resize-none group-hover:border-gray-400 contact-input"
+                  placeholder="Your Message"
                 ></textarea>
               </div>
 
               <button
                 onClick={handleSubmit}
-                className="group w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-2xl hover:shadow-purple-500/50 transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3"
+                className="group relative px-8 py-3 rounded-full font-semibold text-white overflow-hidden flex items-center justify-center gap-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+                style={{ backgroundColor: '#2300EE' }}
               >
-                Send Message
-                <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
+                {/* Animated background on hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                {/* Shine effect */}
+                <div className="absolute inset-0 overflow-hidden rounded-full">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                </div>
+                
+                {/* Content */}
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  Send Message
+                  <svg className="w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </span>
               </button>
             </div>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="mt-20 pt-8 border-t border-white/10 text-center text-gray-400">
+        <div className="mt-20 pt-8 border-t border-gray-800 text-center text-gray-500">
           <p>© 2025 Marshal. All rights reserved.</p>
         </div>
       </div>
 
       <style>{`
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+        .hover-lift {
+          transition: transform 0.3s ease;
         }
 
-        @keyframes slide-right {
-          from {
-            opacity: 0;
-            transform: translateX(-30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
+        .hover-lift:hover {
+          transform: translateY(-2px);
         }
 
-        @keyframes slide-left {
-          from {
-            opacity: 0;
-            transform: translateX(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
+        .contact-input {
+          outline: none !important;
+          box-shadow: none !important;
+          background-color: transparent !important;
+        }
+        
+        .contact-input:focus {
+          outline: none !important;
+          box-shadow: none !important;
+          border-color: #2300EE !important;
+          background-color: transparent !important;
         }
 
-        .animate-fade-in {
-          animation: fade-in 0.8s ease-out;
+        .contact-input:active {
+          background-color: transparent !important;
+        }
+        
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active {
+          -webkit-box-shadow: 0 0 0 30px black inset !important;
+          -webkit-text-fill-color: white !important;
+          box-shadow: none !important;
+          background-color: transparent !important;
+          transition: background-color 5000s ease-in-out 0s;
         }
 
-        .animate-slide-right {
-          animation: slide-right 0.8s ease-out;
+        *:focus-visible {
+          outline: none !important;
         }
 
-        .animate-slide-left {
-          animation: slide-left 0.8s ease-out;
-        }
-
-        .space-y-6 > * {
-          animation: fade-in 0.6s ease-out backwards;
+        input:focus-visible,
+        textarea:focus-visible {
+          outline: none !important;
+          box-shadow: none !important;
+          background-color: transparent !important;
         }
       `}</style>
     </section>

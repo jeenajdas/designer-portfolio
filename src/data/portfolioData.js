@@ -69,7 +69,9 @@ It was designed for a real-world scenario, balancing aesthetics with function. E
   {
     id: 2,
     title: "NovaMed Hospital Website - Modern Healthcare",
-    description: "A clean and modern hospital website design focused on patient experience and easy navigation.",
+    description: `The NovaMed Hospital website was designed to create a seamless and trustworthy digital experience for patients seeking expert medical care. The goal was to design an interface that communicates compassion, professionalism, and reliability while maintaining a clean and modern look.
+The design focuses on easy navigation, quick access to doctor profiles, treatment options, and appointment scheduling. I used a clear layout with professional colors, human-centered imagery, and intuitive UI elements to ensure accessibility for users of all ages.
+From service listings and testimonials to FAQs and contact sections, every page is structured to build trust and simplify patient interaction. The design reflects the hospital’s values of care, innovation, and expertise, turning a complex healthcare journey into a smooth and reassuring online experience.`,
     image: "/images/novamed-project.jpg",
     tech: ["Figma", "UI Design", "Responsive Design"]
   }
@@ -77,5 +79,5 @@ It was designed for a real-world scenario, balancing aesthetics with function. E
 
 export const skillsIntro = {
   title: "SKILLS",
-  description: "I aim research, UI, find interfaces, thing design thinking, visual clarity, and usability together in every project."
+  description: "From research, UI, find interfaces, thing design thinking, visual clarity, and usability together in every project."
 };
